@@ -1,0 +1,165 @@
+.networkError{
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color:rgba(0, 0, 0, 0.7);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.accountContainer {
+    padding: 10px 0 10px 0;
+    width: 100%;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid black;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+  }
+  
+.account {
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    padding: 20px 0 20px 0;
+}
+
+.account:hover {
+  cursor:pointer;
+}
+
+.accountContainer button:hover{
+  background-color: white;
+  color:  black;
+  border: 1px solid black;
+  -webkit-box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2); 
+  box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2);
+}
+
+.accountContainer button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.accountContainer button{
+  padding: 10px 20px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 7px;
+    transition-duration: 0.3s;
+}
+
+h1{
+  padding: 0;
+  margin: 0;
+  font-size: clamp(1.5625rem, 1.335rem + 0.9709vw, 2.5rem);
+}
+
+h2{
+    padding: 15px 0px 15px 0px;
+    font-size: clamp(1.25rem, 1.1742rem + 0.3236vw, 1.5625rem);  
+}
+
+  .catalogo {
+    padding: 50px 0px 20px 0px;
+    display: flex;
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+    text-align: center;
+  }
+
+  .catalogo h1{
+    margin: 0;
+  }
+
+  .catalogo button {
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 7px;
+    transition-duration: 0.3s;
+  }
+
+  .catalogo button:hover{
+    background-color: white;
+    color:  black;
+    border: 1px solid black;
+    -webkit-box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2); 
+    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2);
+  }
+
+  .catalogo button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  button.accountButton{
+    color: black;
+    padding: 0;
+    margin-right: 50px;
+    background-color: white;
+    border: none;
+  }
+
+  button.accountButton:hover{
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    -webkit-box-shadow: none; 
+    box-shadow:  none;
+  }
+
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid rgba(0, 0, 0, 0.232);
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+  p{
+    font-size: clamp(0.75rem, 0.6286rem + 0.5178vw, 1.25rem);
+  }
+
+  .bottoneCatalogo button{
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    box-shadow: 0px 5px 15px 5px rgba(255, 255, 255, 0.3);
+  }
+
+  .bottoneCatalogo button:hover{
+    -webkit-box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2); 
+    box-shadow: 0px 5px 15px 5px rgb(0, 0, 0);
+  }

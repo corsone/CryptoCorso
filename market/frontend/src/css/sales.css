@@ -1,0 +1,31 @@
+.vendite{
+    width: 70%;
+    margin: auto;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+.saleImg{
+    max-width: 100%;
+}
+
+.saleImg:hover{
+    cursor: pointer;
+}
+
+
+
+.noSale {
+    max-width: 100%;
+}
+
+.container p{
+    font-size: 20px;
+}
