@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link} from 'react-router-dom';
 
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, Stage, PresentationControls } from '@react-three/drei'; 
@@ -289,6 +289,7 @@ function Token({}){
                                             <td><button className="button" onClick={() => {
                                                 setShow(true);
                                                 setStudent(requests.students[index]);
+                                                setMatricola(requests.matricole[index]);
                                                 setOp("rifiuta");
                                             }}><p style={{margin: 0}}>Rifiuta richiesta</p></button></td>
                                         </tr>
@@ -400,7 +401,7 @@ function Token({}){
                         <h3 style={{flex: "1", marginTop:"0", marginRight: "50px"}}>CFU: {cid.properties.cfu.description}</h3>
                             <h3 style={{flex: "1", margin:"0"}}>Rarità: {cid.properties.rarity.description}</h3>
                         </div>
-                        {account === undefined || account === address ? <p>Questo token è di tua proprietà</p> : <p>Questo token è di proprietà di: {account}</p>}
+                        {account === undefined || account === address ? <p>Questo token è di tua proprietà</p> : <p>Questo token è di proprietà di: <Link to={`/Account/${account}`}>{account}</Link></p>}
                     </div>
                 </div>}
 
