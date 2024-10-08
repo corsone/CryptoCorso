@@ -33,22 +33,21 @@ function Home() {
 
     return(
         <div>
-          <ConnectedAccount connectWallet={connectWallet} />
-
-          <div className="intro" style={{margin: "0", paddingTop:"0", backgroundColor:"#748EA2"}}><h1 style={{padding: '25px 0 25px 0', color:"white", fontSize:"5vw"}}>CryptoCorso</h1></div>
-
-
-
-            <div className="catalogo" style={{margin: "0", paddingTop:"0", paddingBottom:"7%", backgroundColor:"#748EA2"}}>
-              <img src="/img/catalogo2.png" style={{maxWidth: "100%", filter: "brightness(0.7)", width:"70vw"}}></img>
+          <ConnectedAccount connectWallet={connectWallet}/>
+          <div className="intro" style={{margin: "0", padding:"10px 0", position:"absolute", left:"0", right:"0", zIndex:"10"}}>
+            <h1 style={{padding: '25px 0 25px 0', color:"white", fontSize:"6vw", zIndex:"10", 
+            textShadow: "0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15)"}}>CryptoCorso</h1>
+          </div>
+            <div className="catalogo" style={{paddingBottom:"7%", backgroundColor:"#748EA2"}}>
+              <img src="/img/catalogo2.png" style={{maxWidth: "100%", filter: "brightness(0.7)", width:"70%"}}></img>
               <div style={{position: "absolute", color: "white"}}>
-                {/* <h1 style={{textShadow: "rgba(255, 255, 255, 0.5) 1px 0 10px"}}>Catalogo</h1> */}
                 <h2 style={{textShadow: "rgba(255, 255, 255, 0.5) 1px 0 10px", paddingTop:"10vh"}}>Visualizza l'intera collezione</h2>
                 <div className="bottoneCatalogo">
                   <button  onClick={() => {setTimeout(() => {navigate(`/Catalogue`)}, 300)}}><p style={{margin: 0}}>Vai al catalogo</p></button>
                 </div>
               </div>
             </div>
+            
 
           
             <CosaSono />
@@ -94,22 +93,22 @@ function ConnectedAccount({connectWallet}) {
 
   if(!showAccount){
       return(
-        <div style={{textAlign: 'center'}}>
-          <button className="accountButton" style={{margin:"0", position: "absolute", color: "white", backgroundColor:"transparent", fontSize:"30px"}} onClick={() => {setShowAccount(true)}}>▼</button>
+        <div style={{textAlign: 'center', justifyContent:"center", alignItems:"center", width:"100%", zIndex:"10000"}}>
+          <button className="accountButton" style={{position: "absolute", color: "white", backgroundColor:"transparent", fontSize:"30px", margin:"0", padding:"0", left:"0", right:"0", zIndex:"10000"}} onClick={() => {setShowAccount(true)}}>▼</button>
         </div>
       )
     }
 
     if(address){
       return(
-        <div className="accountContainer">
+        <div className="accountContainer" style={{zIndex:"10000"}}>
           <p className="account" onClick={() => {navigate(`/Account/${address}`)}}>Account: {address}</p>
           <button className="accountButton" onClick={() => {setShowAccount(false)}} style={{fontSize:"25px"}}>▲</button>
         </div>
       )
     }else{
       return(
-        <div className="accountContainer">
+        <div className="accountContainer" style={{zIndex:"10000"}}>
           <p className="account" onClick={connectWallet}>Premi qui per connettere un wallet</p>
         </div>
       )

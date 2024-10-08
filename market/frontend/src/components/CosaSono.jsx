@@ -31,7 +31,7 @@ function CosaSono(){
             <h2 style={{margin:"0", padding:"0"}}>Come diventare proprietario di un CryptoCorso</h2>
             <p>Per diventare proprietario di un CryptoCorso, è necessario superare l'esame corrispondente e successivamente presentare una richiesta alla segreteria. Una volta approvata la richiesta, la segreteria emette un NFT che contiene tutte le informazioni relative all'esame, come la matricola dello studente e il voto ottenuto.</p>
            
-           <div style={{display: "flex", alignItems: "center", justifyContent:"center", textAlign: "center"}}>
+           <div style={{display: "flex", alignItems: "center", justifyContent:"space-between", textAlign: "center", width:"100%"}}>
                 <img ref={img1Ref} className={`fade-in ${img1Visible ? 'visible' : ''}`}  src='/img/tutorial1.png' width="20%"></img>
                 <img ref={img2Ref} className={`fade-in ${img2Visible ? 'visible' : ''}`} style={{transitionDelay: "0.2s", rotate:"180deg", width:"5%"}} src='/img/back.svg'></img>
                 <img ref={img3Ref} className={`fade-in ${img3Visible ? 'visible' : ''}`} style={{transitionDelay: "0.4s"}}  src='/img/tutorial2.png' width="20%"></img>

@@ -10,18 +10,25 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
     const {market, marketAddress, provider, errore, setError} = useContext(AppContext);
     const [cid, setCid] = useState("");
     const [stato, setStato] = useState("non completato");
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        if(stato === "in corso"){
+            setLoading(true);
+        }else{
+            setLoading(false)
+        }
+    }, [loading, stato])
 
     const mint = async () => {
         // crea un nuovo token e lo manda allo studente
         try {
-            const result = await market.safeMint(student, cid);
+            const result = await market.safeMint(student, cid, corso);
+            setStato("in corso")
             await result.wait();
 
             setCid("");
             getCount();
-
-            removeRequest();
 
             setStato("completato");
         } catch (error) {
@@ -33,12 +40,8 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
     const addRequest = async () => {
         // crea la richiesta di un token
         try {
-            const accounts = await provider.listAccounts();
-            const currentAccount = accounts.indexOf(address);
-            const signer1 = provider.getSigner(currentAccount);
-            const market = new ethers.Contract(marketAddress, Market.abi, signer1);
-
             const result = await market.addRequest(corso);
+            setStato("in corso")
             await result.wait();
 
             setStato("completato");
@@ -51,6 +54,7 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
         // rimuove la richiesta quando viene accettata o rifiutata
         try {
             const result = await market.removeRequest(corso, student);
+            setStato("in corso")
             await result.wait();
             
             setStato("completato");
@@ -64,6 +68,7 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
         // aggiunge lo studente al sistema
         try {
             const result = await market.addStudent(student, matricola);
+            setStato("in corso")
             await result.wait();
             
             setStato("completato");
@@ -72,6 +77,15 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
         }
     }
 
+
+    if(loading)
+        return(<div className="saleContainer">
+            <div style={{margin:"12% 0 0 0", textAlign:"center"}}>
+                <div className="loader"></div>
+                <b><p style={{color:"white"}}>Transazione in corso.</p></b>
+                <b><p style={{color:"white"}} className="loading"> Attendere...</p></b>
+            </div>
+        </div>)
 
     if(!show)
         return null;
@@ -210,6 +224,7 @@ function Modal({show, setShow, getCount, minted, getRequest, op, setOp, student,
             </div>
         )
     }
+    
 
     // altrimenti
     return(

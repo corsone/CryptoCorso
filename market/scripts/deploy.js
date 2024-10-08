@@ -24,15 +24,8 @@ async function main() {
 
   const Market = await ethers.getContractFactory("Market");
   const market = await Market.deploy("CryptoCorso", "CC");
-  // const market = await Market.deploy("CryptoCorso", "CC", {
-  //   nonce: 3,
-  //   gasLimit: 6000000,
-  //   gasPrice: 200000000000,
-  // });
-  // console.log(market);
-
-  await market.deployed();
-
+  console.log("Deploy transaction hash:", market.deployTransaction.hash);
+  await market.deployTransaction.wait();
   console.log("Market address:", market.address);
 
 

@@ -1,23 +1,25 @@
-.navbar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 10px 0 10px 0;
-    -webkit-box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2); 
-    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.2);
-  }
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Spazia gli elementi tra loro */
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 15px 0px;
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.2);
+  position: relative; /* Aggiunta per posizionamento */
+}
 
-.navbar button{
-  position: absolute;
-  left: 20px;
+.navbar button {
   border: none;
   cursor: pointer;
   background-color: white;
+  margin: 0 10px 0 10px;
 }
 
-.navbar h1{
-    text-align: center;
-    color: black;
+.navbar h1 {
+  position: absolute; /* Posiziona il titolo in modo assoluto */
+  left: 50%; /* Sposta il titolo a metà della larghezza */
+  transform: translateX(-50%); /* Centra il titolo rispetto al suo punto di partenza */
+  text-align: center; /* Centro il testo */
+  margin: 0; /* Rimuove margini predefiniti */
 }

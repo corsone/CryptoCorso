@@ -72,7 +72,7 @@ function Token({}){
 
     useEffect(() => {
         if (minted !== undefined && owned !== undefined && cids !== undefined && corsi !== undefined && request !== undefined && requests !== undefined) {
-          setLoading(false); // Se tutti gli stati sono valorizzati, il caricamento è completato
+            setTimeout(() => {setLoading(false)}, 1000); // Se tutti gli stati sono valorizzati, il caricamento è completato
         }
 
       }, [minted, owned, corsi, request, requests, cids]);
@@ -151,10 +151,12 @@ function Token({}){
             let matricole = [];
 
             const students = result[0];
-            await Promise.all(students.map(async (e,i) => {
-                const matricola = await market.getMatricola(e);
-                matricole.push(matricola);
-            }));
+            if(address === marketOwner){
+                await Promise.all(students.map(async (e,i) => {
+                    const matricola = await market.getMatricola(e);
+                    matricole.push(matricola);
+                }));
+            }
             const student = result[0].indexOf(address);
             const nonEmptyCourses = result[1].filter(element => element.length > 0); // rimuove gli array vuoti
 
@@ -230,7 +232,7 @@ function Token({}){
 
 
     if(loading){
-        return(<div className="loader"></div>)
+        return(<div className="saleContainer" style={{backgroundColor:"#748EA2"}}><div className="loader"></div></div>)
     }
 
     // se è l'owner e arriva al token dal catalogo
@@ -333,8 +335,10 @@ function Token({}){
                         <h3 style={{flex: "1"}}>Rarità: {rarita}</h3>
                     </div>
 
-                    <p>Non possiedi ancora questo token.</p>
-                    {request.courses[request.indexStudent] === undefined || request.courses[request.indexStudent].length < 5 ? <button className="button" onClick={() => setShow(true)}><p style={{margin: 0}}>Richiedi il CryptoCorso</p></button> : <p>Al momento non puoi richiederlo perché hai superato il numero di richieste per volta. Attendi che vengano processate.</p>}
+                    {address && <div>
+                        <p>Non possiedi ancora questo token.</p>
+                        {request.courses[request.indexStudent] === undefined || request.courses[request.indexStudent].length < 5 ? <button className="button" onClick={() => setShow(true)}><p style={{margin: 0}}>Richiedi il CryptoCorso</p></button> : <p>Al momento non puoi richiederlo perché hai superato il numero di richieste per volta. Attendi che vengano processate.</p>}
+                    </div>}
                 </div>
 
 

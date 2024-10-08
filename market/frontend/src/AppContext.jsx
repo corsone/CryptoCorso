@@ -9,12 +9,18 @@ export const ContextProvider = ({children}) => {
     const [networkError, setNetworkError] = useState(undefined);
     const [errore, setErrore] = useState(undefined);
 
-    const HARDHAT_NETWORK_ID = '0x7a69'; //id Hardhat Network
-    const marketAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'; 
-    const marketOwner = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
-    const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
-    const signer = provider.getSigner();
+    const SEPOLIA_NETWORK_ID = '0xaa36a7'; //id sepolia Network
+    const marketAddress = '0x277027C09036fAe65A4D4013ac2F3949327b2D50'; 
+    const marketOwner = '0xC783Ab3AdCfdC25900F1A2B4776823D5D8D703cB';
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    let signer;
+    if(address){
+      signer = provider.getSigner();
+    }else{
+      signer = provider.getSigner('0xC783Ab3AdCfdC25900F1A2B4776823D5D8D703cB');
+    }
     const market = new ethers.Contract(marketAddress, Market.abi, signer);
+
   
     const handleAccountsChanged = ([newAddress]) => {
       if (!newAddress) {
@@ -40,8 +46,8 @@ export const ContextProvider = ({children}) => {
     const handleNetwork = async () => {
       const networkId = await window.ethereum.request({ method: 'eth_chainId' });
   
-      if (networkId !== HARDHAT_NETWORK_ID) {
-        setNetworkError(`Connected to wrong network. Please switch to the network with ID ${HARDHAT_NETWORK_ID}.`);
+      if (networkId !== SEPOLIA_NETWORK_ID) {
+        setNetworkError(`Connected to wrong network. Please switch to the sepolia network`);
       }else{
         setNetworkError(undefined); 
       }
@@ -61,11 +67,21 @@ export const ContextProvider = ({children}) => {
 
     const setError = (err) => {
       // formatta il messaggio di errore
-      let message = err.reason ? err.reason.replace('Error: VM ', '') : err.message;
-      message = message.replace(' reverted with reason string \'', ' ');
-      message = message.replace('\'', '');
-      console.log(message);
-      setErrore(message);
+      if(err !== undefined && err.reason !== undefined){
+        let message = err.reason.replace('Error: VM ', '');
+        message = message.replace(' reverted with reason string \'', ' ');
+        message = message.replace('\'', '');
+        console.log(message);
+        setErrore(message);
+      }else if(err !== undefined && err.message !== undefined){
+        let message = err.message.replace('Error: VM ', '');
+        message = message.replace(' reverted with reason string \'', ' ');
+        message = message.replace('\'', '');
+        console.log(message);
+        setErrore(message);
+      }else{
+        setErrore(undefined);
+      }
   }
 
     const value = {

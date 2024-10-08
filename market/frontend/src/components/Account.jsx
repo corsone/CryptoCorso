@@ -25,7 +25,6 @@ function Account() {
     const [cfu, setCfu] = useState(0); // cfu totali
     const [loading, setLoading] = useState(true); // se sta caricando
 
-
     useEffect(() => {
         getCount(); // recupera tutti i token creati
         getRequest(); // Recupera tutte le richieste fatte dagli studenti
@@ -52,10 +51,9 @@ function Account() {
     }, [minted]);
 
     useEffect(() => {
-        if (minted !== undefined && owned !== undefined && corsi !== undefined && request !== undefined && cids !== undefined) {
-          setLoading(false); // Se tutti gli stati sono valorizzati, il caricamento è completato
+        if (minted && owned && corsi && request && cids) {
+          setTimeout(() => {setLoading(false)}, 1000); // Se tutti gli stati sono valorizzati, il caricamento è completato
         }
-
       }, [minted, owned, corsi, request, cids]);
 
 
@@ -128,10 +126,12 @@ function Account() {
             let matricole = [];
 
             const students = result[0];
-            await Promise.all(students.map(async (e,i) => {
-                const matricola = await market.getMatricola(e);
-                matricole.push(matricola);
-            }));
+            if (address === marketOwner){
+                await Promise.all(students.map(async (e,i) => {
+                    const matricola = await market.getMatricola(e);
+                    matricole.push(matricola);
+                }));
+            }
 
             const nonEmptyCourses = result[1].filter(element => element.length > 0); // rimuove gli array vuoti
 
@@ -195,19 +195,19 @@ function Account() {
 
     // se sta caricando i dati
     if(loading){
-        return(<div className="loader"></div>)
+        return(<div className="saleContainer" style={{backgroundColor:"#748EA2"}}><div className="loader"></div></div>)
     }
 
     // se è l'owner
     if(address === marketOwner && address === account){
         return(
             <div>
-                <Navbar prevPage="/" />
+                <Navbar prevPage="/" account={account}/>
                 <div className="profilo" style={{height:window.innerHeight}}>
                     <h1>Dettagli account</h1>
                     <p>{address} - <b>proprietario del market</b></p>
 
-                    <div>
+                    <div style={{margin:"50px 0 75px 0"}}>
                         <h2>Aggiungi nuovo studente</h2>
                         <div className="saleRiepilogo">
                         <div className="operazioni">
@@ -225,7 +225,7 @@ function Account() {
                     </div>
                     
 
-                    <div className="posseduti">
+                    <div className="posseduti" style={{margin:"75px 0 75px 0"}}>
                     <h2>Richieste</h2>
                     {request && request.courses.length > 0? (
                         <table style={{overflow: "hidden", wordWrap: "break-word"}}>
@@ -289,16 +289,16 @@ function Account() {
     // altrimenti
     return(
         <div>
-            <Navbar prevPage="/" />
+            <Navbar prevPage="/" account={account}/>
             <div className="profilo">
                 <h1>Dettagli account</h1>
                 {address === account? <p>{address} - <b>Questo è il tuo account</b></p> : <p>{account}</p>}
 
-                <div className="posseduti">
+                <div className="posseduti" style={{margin:"50px 0 75px 0"}}>
                     <span style={{display:'flex'}}><h2>CryptoCorso posseduti: {owned.length}</h2> <h2>CFU posseduti: {cfu}/180</h2></span>
                     
-                    <div >
-                        {cids && cids.length !== 0 ? (
+                    <div>
+                        {owned && cids && cids.length !== 0 ? (
                             <div style={{display:"flex",flexWrap: "wrap", gap: "10px"}}>
                                 {cids.map((element, index) => (
                                     <div key={index} className="corsiContainer" style={{ width: "calc(33.33% - 10px)" }}>
@@ -323,7 +323,7 @@ function Account() {
 
                 {address === account  && (
                     <div>
-                        {request.courses.length > 0 && request.students.includes(address) && <div style={{margin:"25px 0 50px 0"}}>
+                        {request.courses.length > 0 && request.students.includes(address) && <div style={{margin:"75px 0 75px 0"}}>
                             <h2>CryptoCorso richiesti: {request.courses[request.students.findIndex((student => student === address))].length}</h2>
                             <table>
                                 <thead>
@@ -344,7 +344,7 @@ function Account() {
                             </table>
 
                         </div>}
-                        <div style={{margin:"25px 0 50px 0"}}>
+                        <div style={{margin:"75px 0 75px 0"}}>
                             <h2>CryptoCorso Mancanti: {corsi.length}</h2>
                             <table>
                                 <thead>

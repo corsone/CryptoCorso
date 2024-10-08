@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import '../css/navbar.css'
 
-function Navbar({prevPage}){
+function Navbar({prevPage, account}){
     const navigate = useNavigate();
     
     return(

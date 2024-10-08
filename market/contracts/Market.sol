@@ -107,6 +107,20 @@ contract Market is ERC721{
     /// @param corso è il nome del corso da rimuovere
     /// @param student è lo studente che ha fatto la richiesta
     function removeRequest(string memory corso, address student) external onlyOwner{
+        _deleteRequest(corso, student);
+    }
+
+
+    /// @notice crea un nuovo NFT e assegna la proprietà allo studente
+    /// @param to è l'indirizzo dello studente a cui assegnare l'NFT
+    /// @param cid è il content id del file json contenete i metadati dell'NFT
+    function safeMint(address to, string memory cid, string memory corso) external onlyOwner{
+        _mint(to, cid);
+        _deleteRequest(corso, to);
+    }
+
+
+    function _deleteRequest(string memory corso, address student) internal{
         require(String.isEmpty(_students[student]), 'Student does not exist');
         require(_isCorrectCourse[corso], 'Course does not exist');
         
@@ -134,11 +148,8 @@ contract Market is ERC721{
         delete _courseIndex[student][corso]; // rimuovo dalla mappa l'indice del corso rimosso
     }
 
-
-    /// @notice crea un nuovo NFT e assegna la proprietà allo studente
-    /// @param to è l'indirizzo dello studente a cui assegnare l'NFT
-    /// @param cid è il content id del file json contenete i metadati dell'NFT
-    function safeMint(address to, string memory cid) external onlyOwner{
+    
+    function _mint(address to, string memory cid) internal{
         require(to != address(0), 'ERC721: mint to the zero address');
 
         _tokenId = _tokenId.add(1);
