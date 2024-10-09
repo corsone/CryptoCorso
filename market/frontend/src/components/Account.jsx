@@ -203,7 +203,7 @@ function Account() {
         return(
             <div>
                 <Navbar prevPage="/" account={account}/>
-                <div className="profilo" style={{height:window.innerHeight}}>
+                <div className="profilo" style={{height:window.innerHeight, marginBottom:"20vh"}}>
                     <h1>Dettagli account</h1>
                     <p>{address} - <b>proprietario del market</b></p>
 
@@ -265,9 +265,9 @@ function Account() {
                             </tbody>
                         </table>
                         ) : (
-                            <div style={{textAlign:'center'}}>
+                        <div style={{textAlign:'center'}}>
                             <p>non sono presenti richieste al momento</p>
-                            <img  className="noSale" src='/img/sad.png' alt='sad' width="45%"></img>
+                            <img  className="noSale" src='/img/sad.png' alt='sad' width="35%"></img>
                         </div>
                         )}
                     </div>
@@ -314,9 +314,9 @@ function Account() {
                             </div>
                         )
                         :
-                        (<div style={{textAlign:'center'}}>
+                        (<div style={{textAlign:'center', marginTop:"25px"}}>
                             {address === account? <p>Non possiedi nessun CryptoCorso</p> : <p>Questo account non possiede nessun CryptoCorso</p>}
-                            <img  className="noSale" src='/img/sad.png' alt='sad' width="45%"></img>
+                            <img  className="noSale" src='/img/sad.png' alt='sad' width="35%"></img>
                         </div>)}
                     </div>
                 </div>
@@ -344,7 +344,7 @@ function Account() {
                             </table>
 
                         </div>}
-                        <div style={{margin:"75px 0 75px 0"}}>
+                        <div style={{margin:"75px 0 0 0"}}>
                             <h2>CryptoCorso Mancanti: {corsi.length}</h2>
                             <table>
                                 <thead>

@@ -13,6 +13,7 @@ export const ContextProvider = ({children}) => {
     const marketAddress = '0x277027C09036fAe65A4D4013ac2F3949327b2D50'; 
     const marketOwner = '0xC783Ab3AdCfdC25900F1A2B4776823D5D8D703cB';
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
     let signer;
     if(address){
       signer = provider.getSigner();
@@ -83,6 +84,7 @@ export const ContextProvider = ({children}) => {
         setErrore(undefined);
       }
   }
+
 
     const value = {
         address,
